@@ -1,30 +1,17 @@
-Problem 1: 0.012 seconds
+ ## Times for Each Problem ## 
 
-Problem 2: 0.012 seconds
-
-Problem 3: 0.093 seconds
-
-Problem 4: 1.497 seconds
-
-Problem 5: 0.067 seconds
-
-Problem 6: 0.009 seconds
-
-Problem 7: 0.750 seconds
-
-Problem 8: 0.075 seconds
-
-Problem 9: 0.301 seconds
-
-Problem 10: 0.175 seconds
-
-Problem 11: 0.075 seconds
-
-Problem 12: 3.272 seconds
-
-Problem 13: 0.013 seconds
-
-Problem 14: 12.250 seconds
-
-Problem 15: 0.063 seconds
-
+1.  0.011 seconds
+1.  0.012 seconds
+1.  0.086 seconds
+1.  1.527 seconds
+1.  0.059 seconds
+1.  0.009 seconds
+1.  0.841 seconds
+1.  0.084 seconds
+1.  0.302 seconds
+1.  0.176 seconds
+1.  0.074 seconds
+1.  3.325 seconds
+1.  0.013 seconds
+1.  12.236 seconds
+1.  0.059 seconds
