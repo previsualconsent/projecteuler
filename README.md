@@ -1,4 +1,4 @@
-## Times for Each Problem ## 
+## Times for Each Problem
 
 1.  0.012 seconds
 1.  0.012 seconds
