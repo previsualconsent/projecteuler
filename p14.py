@@ -10,10 +10,13 @@ def collatz(n):
 
 collatz_length = {1:1}
 
-for n in range(2,1000000):
-   chain = [n]
-   collatz_length[n]=1
-   i = collatz(n)
+#for i in range(1000000, 2, -1):
+for i in range(2,1000000):
+   chain = []
+
+   if not i % 10000:
+      print i, len(collatz_length)
+
    while not i in collatz_length:
       chain.append(i)
       collatz_length[i] = 0

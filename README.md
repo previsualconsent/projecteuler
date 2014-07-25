@@ -1,17 +1,17 @@
 ## Times for Each Problem
 
 1.  0.012 seconds
-1.  0.012 seconds
-1.  0.086 seconds
-1.  1.512 seconds
-1.  0.060 seconds
-1.  0.012 seconds
-1.  0.742 seconds
-1.  0.086 seconds
-1.  0.299 seconds
-1.  0.169 seconds
-1.  0.076 seconds
-1.  3.675 seconds
-1.  0.013 seconds
-1.  12.264 seconds
-1.  0.058 seconds
+2.  0.011 seconds
+3.  0.098 seconds
+4.  1.494 seconds
+5.  0.067 seconds
+6.  0.009 seconds
+7.  0.755 seconds
+8.  0.084 seconds
+9.  0.301 seconds
+10.  0.174 seconds
+11.  0.078 seconds
+12.  3.364 seconds
+13.  0.010 seconds
+14.  11.934 seconds
+15.  0.059 seconds
