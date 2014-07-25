@@ -50,19 +50,22 @@ def prime_seive(n):
 
 class primeFactors:
    def __init__(self,n):
-      self.factors = {}
-      for p in primes:
-         while not n % p:
-            self.addfactor(p)
-            n /= p
-         if n == 1 : break
-         #if n in primeset:
-         #   self.addfactor(n)
-         #   n = 1
-         #   break
-      if (not n == 1) and primes[-1]**2 > n:
-            self.addfactor(n)
-            n = 1
+      if type(n) == int:
+         self.factors = {}
+         for p in primes:
+            while not n % p:
+               self.addfactor(p)
+               n /= p
+            if n == 1 : break
+            #if n in primeset:
+            #   self.addfactor(n)
+            #   n = 1
+            #   break
+         if (not n == 1) and primes[-1]**2 > n:
+               self.addfactor(n)
+               n = 1
+      elif type(n) == dict:
+         self.factors = n
 
    def addfactor(self,p):
       if p in self.factors:
@@ -79,6 +82,16 @@ class primeFactors:
       return ret
    def getNdivisors(self):
       return np.prod( np.array(self.factors.values()) + 1)
+   def LCM(self,other_pf):
+      retdict = self.factors.copy()
+
+      for i in other_pf.factors:
+         if i in retdict:
+            retdict[i] = max( self.factors[i],other_pf.factors[i])
+         else:
+            retdict[i] = other_pf.factors[i]
+      return primeFactors(retdict)
+
          
 
    def __repr__(self):
