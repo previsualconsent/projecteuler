@@ -6,16 +6,11 @@ def collatz(n):
    else:
       return n/2
 
-
-
 collatz_length = {1:1}
 
 #for i in range(1000000, 2, -1):
 for i in range(2,1000000):
    chain = []
-
-   if not i % 10000:
-      print i, len(collatz_length)
 
    while not i in collatz_length:
       chain.append(i)
@@ -28,4 +23,3 @@ for i in range(2,1000000):
          collatz_length[c] += collatz_length[i]
 
 print collatz_length.keys()[np.argmax(collatz_length.values())]
-
