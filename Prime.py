@@ -50,7 +50,7 @@ def prime_seive(n):
 
 class primeFactors:
    def __init__(self,n):
-      if type(n) == int:
+      if type(n) == int or type(n) == np.int64:
          self.factors = {}
          for p in primes:
             while not n % p:
@@ -66,6 +66,8 @@ class primeFactors:
                n = 1
       elif type(n) == dict:
          self.factors = n
+      else:
+         print type(n), "is not supported"
 
    def addfactor(self,p):
       if p in self.factors:
@@ -82,6 +84,17 @@ class primeFactors:
       return ret
    def getNdivisors(self):
       return np.prod( np.array(self.factors.values()) + 1)
+
+   def getdivisors(self):
+      divisors = [1]
+      for p in self.factors:
+         newd = []
+         for i in divisors:
+            newd += [i*p**l for l in range(0,self.factors[p]+1) ]
+         divisors = newd
+      divisors.sort()
+      return divisors[:-1]
+
    def LCM(self,other_pf):
       retdict = self.factors.copy()
 
