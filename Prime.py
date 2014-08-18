@@ -105,6 +105,21 @@ class primeFactors:
             retdict[i] = other_pf.factors[i]
       return primeFactors(retdict)
 
+   def GCD(self,other_pf):
+      retdict = self.factors.copy()
+      for i in retdict:
+         if i in other_pf.factors:
+            retdict[i] = min(self.factors[i],other_pf.factors[i])
+         else:
+            retdict.pop(i)
+      return primeFactors(retdict)
+   def getValue(self):
+      ret = 1
+      for i in self.factors:
+         ret *= i**self.factors[i]
+      return ret
+
+
          
 
    def __repr__(self):
