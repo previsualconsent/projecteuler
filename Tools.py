@@ -26,3 +26,50 @@ def isPalindrome(n):
 
 def reverseInt(n):
    return int(str(n)[-1::-1])
+
+def digitalSum(n):
+    return sum( [int(d) for d in str(n)] )
+
+def gcd(a,b,c=0):
+    c+=1
+    if a == 0 or b == 0:
+        return 1
+    if a == b:
+        return a
+    elif a > b:
+        return gcd(a-b,b,c)
+    else:
+        return gcd(a,b-a,c)
+
+def bin_gcd(a,b):
+    if not a:
+        return b
+    if not b:
+        return a
+    shift = 0
+    while (a | b) & 1 == 0:
+        a = a >> 1
+        b = b >> 1
+        shift += 1
+    while (a & 1) == 0:
+        a = a >> 1
+
+    while True:
+        while (b & 1) == 0 :
+            b = b >> 1
+
+        if a > b:
+            c = b
+            b = a
+            a = c
+        b = b - a
+
+        if b == 0:
+            break
+
+    return a << shift
+
+
+
+
+
