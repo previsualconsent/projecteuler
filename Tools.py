@@ -69,7 +69,19 @@ def bin_gcd(a,b):
 
     return a << shift
 
-
+def fibonacci(a,b, max_i):
+   if max_i > 0:
+      yield a
+   if max_i > 1:
+      yield b
+   n = a + b
+   i = 2
+   while max_i > i:
+      i += 1
+      yield n
+      a = b
+      b = n
+      n = a + b
 
 
 
