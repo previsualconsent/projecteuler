@@ -31,21 +31,33 @@ def prime_seive(n):
    global primes
    global n_primes
 
-   if n < primes[-1]:
+   old_max = primes[-1]
+   if n < old_max:
       return primes
-   isPrime =  np.ones(n,dtype=bool)
-   isPrime[0:2] = False
+   isPrime_list =  np.zeros(n,dtype=bool)
+   isPrime_list[old_max:] = True
+   isPrime_list[primes] = True
    max_n = int(math.ceil(math.sqrt(n)))
    for i in xrange(2,max_n):
       if not i % 100:
          print "Seiving [%d/%d]"%(i,max_n)
 
-      if isPrime[i]:
-         isPrime[ i*i : n + 1 : i ] = False #multiples of i from i^2 to n are not prime
+      if isPrime_list[i]:
+         lb = max(i*i, i - (old_max % i) + old_max)
+         isPrime_list[ lb : n + 1 : i ] = False #multiples of i from i^2 to n are not prime
 
-   primes = np.where(isPrime)[0]
+   primes = np.where(isPrime_list)[0]
    n_primes = primes.size
    return primes
+
+from Tools import binary_search
+def isPrime(n):
+    '''perform binary search on primelist'''
+    if n > primes[-1]:
+        print n,"larger than max prime", primes[-1]
+    return binary_search(primes, n) != -1
+
+
 
 
 class primeFactors:
@@ -84,6 +96,11 @@ class primeFactors:
       return ret
    def getNdivisors(self):
       return np.prod( np.array(self.factors.values()) + 1)
+   def isPrime(self):
+       if len(self.factors) == 1 and self.factors.values()[0] == 1:
+           return True
+       else:
+           return False
 
    def getdivisors(self):
       divisors = [1]
