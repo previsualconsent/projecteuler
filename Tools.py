@@ -27,6 +27,9 @@ def isPalindrome(n):
 def reverseInt(n):
    return int(str(n)[-1::-1])
 
+def is_perm(a,b):
+   return sorted(str(a)) == sorted(str(b))
+
 def digitalSum(n):
     return sum( [int(d) for d in str(n)] )
 
