@@ -153,3 +153,30 @@ class primeFactors:
 def factor(n):
    prime_seive(int(math.ceil(math.sqrt(n))))
    return primeFactors(n)
+
+def prime_divisors(n):
+   if primes[-1] < n:
+      prime_seive(n)
+   pd = []
+
+   for p in primes:
+      if n % p == 0:
+         pd.append(p)
+         n /= p
+      while n % p == 0:
+         n /= p
+      if p > n:
+         break
+   return pd
+
+def rel_primes(n):
+
+   isRelPrime =  np.ones(n+1,dtype=bool)
+   isRelPrime[prime_divisors(n)] = False
+   max_n = int(math.ceil(math.sqrt(n)))
+   for i in xrange(2,max_n):
+      if not isRelPrime[i]:
+         isRelPrime[ i*i : n + 1 : i ] = False #multiples of i from i^2 to n are not prime
+
+   return np.where(isRelPrime)[0][1:]
+
