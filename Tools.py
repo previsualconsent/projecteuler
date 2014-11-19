@@ -1,6 +1,7 @@
 import itertools
 import string
 import time
+import math
    
 def check_pandigital(n):
    """ check if a string represents a pandigital number """
@@ -32,6 +33,9 @@ def is_perm(a,b):
 
 def digitalSum(n):
     return sum( [int(d) for d in str(n)] )
+
+def gcd_list(l):
+   return reduce(gcd,l)
 
 def gcd(a,b,c=0):
     c+=1
@@ -86,16 +90,53 @@ def fibonacci(a,b, max_i):
       b = n
       n = a + b
 
-from bisect import bisect_left
+def __rf_helper__(n,n2,a,b):
+   x = int ( a / (n2 - b))
+   z = (n - b ** 2) / a
+   y = abs(b - x * z)
+   #print "in: ", (n,n2,a,b)
+   #print "out: ", (x,y,z)
+   #raw_input()
+   return (x,y,z)
 
+def repeating_fraction_sqrtn(n):
+   ''' Works at precision 5, farther and it gets things wrong '''
+   l = []
+   xs = []
+   n2 = math.sqrt(n)
+   l.append(int(n2))
+   a = 1
+   b = int(n2)
+   
+   while (a,b) not in xs:
+      xs.append((a,b))
+      i,b,a = __rf_helper__(n, n2, a, b)
+      l.append(i)
+
+   cycle_point = xs.index((a,b))+1
+   return ( l[:cycle_point], l[cycle_point:])
+
+import fractions
+def repeating_fraction_conv((start,loop),n):
+   ls = len(start)
+   ll = len(loop)
+   for i in xrange(n):
+      f = fractions.Fraction(0)
+      for j in xrange(i,-1,-1):
+         if j < ls:
+            a = start[j]
+         else:
+            a = loop[ (j - ls) % ll ] 
+
+         if f:
+            f = 1/f + a
+         else:
+            f = fractions.Fraction(a)
+      yield f
+   
+import bisect 
 def binary_search(a, x, lo=0, hi=None):   # can't use a to specify default for hi
     hi = hi if hi is not None else len(a) # hi defaults to len(a)   
-    pos = bisect_left(a,x,lo,hi)          # find insertion position
+    pos = bisect.bisect_left(a,x,lo,hi)          # find insertion position
     return (pos if pos != hi and a[pos] == x else -1) # don't walk off the end
-
-
-
-
-
-
 
