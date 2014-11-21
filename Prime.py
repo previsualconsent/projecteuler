@@ -170,6 +170,7 @@ def prime_divisors(n):
    return pd
 
 def rel_primes(n):
+   global t
 
    isRelPrime =  np.ones(n+1,dtype=bool)
    isRelPrime[prime_divisors(n)] = False
@@ -179,4 +180,27 @@ def rel_primes(n):
          isRelPrime[ i*i : n + 1 : i ] = False #multiples of i from i^2 to n are not prime
 
    return np.where(isRelPrime)[0][1:]
+
+def totient(n):
+   """ phi(n) = n (1 - 1/p1)* ... *(1 - p_n) where p_i are prime_factors of n """
+   """ yields (n,phi(n)) """
+
+   tot = np.array(range(n),dtype=float) # seed with n
+   last_p = 2
+   ti = 2
+
+   for p in primes:
+      if p > n: # if we have a prime thats too large
+         for y in tot[last_p:n]: # return phi's up to n
+            yield (ti, int(y))
+            ti+=1
+         break
+      tot[p: n + 1: p] *= (1 - 1./p) # apply the factor to multiple's of p
+      for y in tot[last_p:p]:        # return phi's between last and this prime
+         yield (ti, int(y))
+         ti+=1
+      last_p = p
+
+
+   
 
