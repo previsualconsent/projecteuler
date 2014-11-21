@@ -1,19 +1,19 @@
-import Prime
-from itertools import count
 
-n = 1000
-
-res = []
-for a in count(2):
-   f = Prime.factor(a)
-   if len(f.factors) == 4:
-      res.append(a)
-      if len(res) == 4:
-         print res
-         break
-   else:
-      res = []
-
-
-
-
+Limit=1000000     # Search under 1 million for now
+factors=[0]*Limit # number of prime factors.
+count=0
+for i in xrange(2,Limit):
+    if factors[i]==0:
+        # i is prime
+        count =0
+        val =i
+        while val < Limit:
+            factors[val] += 1
+            val+=i
+    elif factors[i] == 4:
+        count +=1
+        if count == 4:
+            print i-3 # First number
+            break
+    else:
+        count = 0
