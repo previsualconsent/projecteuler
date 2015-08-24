@@ -32,7 +32,7 @@ def prime_seive(n):
    global n_primes
 
    old_max = primes[-1]
-   if n < old_max:
+   if n <= old_max:
       return primes
    isPrime_list =  np.zeros(n,dtype=bool)
    isPrime_list[old_max:] = True
@@ -57,8 +57,14 @@ def isPrime(n):
         print n,"larger than max prime", primes[-1]
     return binary_search(primes, n) != -1
 
-
-
+import bisect
+def primesLessThan(n):
+   global primes
+   prime_seive(n)
+   pos = bisect.bisect(primes,n) - 1
+   if pos < 0:
+      return []
+   return primes[pos::-1]
 
 class primeFactors:
    def __init__(self,n):
@@ -185,13 +191,13 @@ def totient(n):
    """ phi(n) = n (1 - 1/p1)* ... *(1 - p_n) where p_i are prime_factors of n """
    """ yields (n,phi(n)) """
 
-   tot = np.array(range(n),dtype=float) # seed with n
+   tot = np.array(range(n+1),dtype=float) # seed with n
    last_p = 2
    ti = 2
 
    for p in primes:
       if p > n: # if we have a prime thats too large
-         for y in tot[last_p:n]: # return phi's up to n
+         for y in tot[last_p:]: # return phi's up to n
             yield (ti, int(y))
             ti+=1
          break
@@ -200,6 +206,10 @@ def totient(n):
          yield (ti, int(y))
          ti+=1
       last_p = p
+   else:
+      for y in tot[last_p:]: # return phi's up to n
+          yield (ti, int(y))
+          ti+=1
 
 
    
