@@ -37,16 +37,22 @@ def digitalSum(n):
 def gcd_list(l):
    return reduce(gcd,l)
 
-def gcd(a,b,c=0):
-    c+=1
+gcd_dict = dict()
+def gcd(a,b):
+    #if (a,b) in gcd_dict:
+      #return gcd_dict[(a,b)]
     if a == 0 or b == 0:
+        #gcd_dict[(a,b)] = 1
         return 1
     if a == b:
+        #gcd_dict[(a,b)] = a
         return a
     elif a > b:
-        return gcd(a-b,b,c)
+        ret = gcd(a-b,b)
     else:
-        return gcd(a,b-a,c)
+        ret =  gcd(a,b-a)
+    #gcd_dict[(a,b)] = ret
+    return ret
 
 def bin_gcd(a,b):
     if not a:
@@ -140,3 +146,21 @@ def binary_search(a, x, lo=0, hi=None):   # can't use a to specify default for h
     pos = bisect.bisect_left(a,x,lo,hi)          # find insertion position
     return (pos if pos != hi and a[pos] == x else -1) # don't walk off the end
 
+def gen_pent(max):
+   from itertools import count
+   for i in count(1):
+      np = i * (3 * i - 1) / 2
+      if np > max: return
+      yield (np, (-1)**i)
+      nn = - i * (- 3 * i - 1) / 2
+      if nn > max: return
+      yield (nn, (-1)**i)
+
+def partitions(n, res = {0:1}):
+   if n in res:
+      return res[n]
+   s = 0
+   for p,sign in gen_pent(n):
+      s -= sign*partitions(n - p) 
+   res[n] = s
+   return res[n]
