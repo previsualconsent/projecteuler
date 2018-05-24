@@ -164,3 +164,16 @@ def partitions(n, res = {0:1}):
       s -= sign*partitions(n - p) 
    res[n] = s
    return res[n]
+
+def addDigit(s,d):
+   """ 
+   s is string, d is integer
+   adds inter to string incase of large s
+   """
+   if not d: return s
+   for i in range(len(s)):
+      ss = str(int(s[-1-i:]) + d)
+      if len(ss)-1 == i:
+         break
+   return s[:-i-1] + ss
+
